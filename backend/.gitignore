@@ -1,0 +1,13 @@
+node_modules
+.env
+
+
+.prettierignore
+.prettierrc
+README.md
+DOCUMENTATION.md
+CHANGELOG.md
+codeBeast.drawio
+logs/
+dist/
+public/
