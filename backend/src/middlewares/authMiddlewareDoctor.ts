@@ -27,7 +27,7 @@ const authJwtDoctor = asyncHandler(
       if (!user) {
         throw new ApiError(404, "user not found");
       } else {
-        req.user = user;
+        req.user = user; //! important TODO ALWAYS
       }
 
       next();

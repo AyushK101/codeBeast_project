@@ -41,9 +41,9 @@ import prescriptionRouter from './routes/prescription.routes'
 import hospitalRouter from './routes/hospital.routes'
 
 app.use('/api/v1/users',userRouter)
-app.use('/api/v1/doctor',doctorRouter)
-app.use('/api/v1/prescription',prescriptionRouter)
-app.use('/api/v1/hospital',hospitalRouter)
+app.use('/api/v1/doctors',doctorRouter)
+app.use('/api/v1/prescriptions',prescriptionRouter)
+app.use('/api/v1/hospitals',hospitalRouter)
 
 
 
