@@ -21,30 +21,30 @@ const Health = asyncHandler(async (req: Request, res: Response) => {
   res.status(200).json({ message: 'Health check successful 🟢' });
 });
 
-// ✅ Signup Patient
-const Signup = asyncHandler(async (req: Request, res: Response) => {
-  const { name, email, password } = req.body || {};
+//  ✅ Signup Patient
+// const Signup = asyncHandler(async (req: Request, res: Response) => {
+//   const { name, email, password } = req.body || {};
 
-  const schemaValidation = common.userSchema.safeParse({ name, email, password });
-  if (!schemaValidation.success) {
-    throw new ApiError(400, 'Schema validation error', JSON.parse(schemaValidation.error.message));
-  }
+//   const schemaValidation = common.userSchema.safeParse({ name, email, password });
+//   if (!schemaValidation.success) {
+//     throw new ApiError(400, 'Schema validation error', JSON.parse(schemaValidation.error.message));
+//   }
 
-  const checkExisting = await Patient.findOne({ email });
-  if (checkExisting) throw new ApiError(400, 'Patient already registered');
+//   const checkExisting = await Patient.findOne({ email });
+//   if (checkExisting) throw new ApiError(400, 'Patient already registered');
 
-  const patientCreated = await Patient.create({ name, email, password });
-  const createdPatient = await Patient.findById(patientCreated._id).select('-password');
+//   const patientCreated = await Patient.create({ name, email, password });
+//   const createdPatient = await Patient.findById(patientCreated._id).select('-password');
 
-  if (!createdPatient) throw new ApiError(500, 'Failed to fetch created patient');
+//   if (!createdPatient) throw new ApiError(500, 'Failed to fetch created patient');
 
-  const token = createdPatient.generateToken();
+//   const token = createdPatient.generateToken();
 
-  res
-    .status(201)
-    .cookie('token', token, options)
-    .json(new ApiResponse(201, 'Patient created successfully', createdPatient));
-});
+//   res
+//     .status(201)
+//     .cookie('token', token, options)
+//     .json(new ApiResponse(201, 'Patient created successfully', createdPatient));
+// });
 
 // ✅ Login Patient
 const Login = asyncHandler(async (req: Request, res: Response) => {
@@ -79,30 +79,30 @@ const Logout = asyncHandler(async (req: Request, res: Response) => {
 });
 
 // ✅ Delete Patient
-const deletePatient = asyncHandler(async (req: Request, res: Response) => {
-  const { email, password } = req.body || {};
+// const deletePatient = asyncHandler(async (req: Request, res: Response) => {
+//   const { email, password } = req.body || {};
 
-  const schemaValidation = common.loginSchema.safeParse({ email, password });
-  if (!schemaValidation.success) {
-    throw new ApiError(400, 'Schema validation failed', JSON.stringify(schemaValidation.error.message));
-  }
+//   const schemaValidation = common.loginSchema.safeParse({ email, password });
+//   if (!schemaValidation.success) {
+//     throw new ApiError(400, 'Schema validation failed', JSON.stringify(schemaValidation.error.message));
+//   }
 
-  const checkPatient = await Patient.findOne({ email });
-  if (!checkPatient) throw new ApiError(404, 'Patient is not registered');
+//   const checkPatient = await Patient.findOne({ email });
+//   if (!checkPatient) throw new ApiError(404, 'Patient is not registered');
 
-  const passwordMatch = await checkPatient.isPasswordCorrect(password);
-  if (!passwordMatch) throw new ApiError(401, 'Incorrect password');
+//   const passwordMatch = await checkPatient.isPasswordCorrect(password);
+//   if (!passwordMatch) throw new ApiError(401, 'Incorrect password');
 
-  const deleteResponse = await Patient.deleteOne({ email });
-  if (!deleteResponse.acknowledged || deleteResponse.deletedCount !== 1) {
-    throw new ApiError(500, 'Failed to delete patient, try again');
-  }
+//   const deleteResponse = await Patient.deleteOne({ email });
+//   if (!deleteResponse.acknowledged || deleteResponse.deletedCount !== 1) {
+//     throw new ApiError(500, 'Failed to delete patient, try again');
+//   }
 
-  res
-    .cookie('token', '', { ...options, maxAge: 0 })
-    .status(200)
-    .json(new ApiResponse(200, 'Patient deleted successfully', { email }));
-});
+//   res
+//     .cookie('token', '', { ...options, maxAge: 0 })
+//     .status(200)
+//     .json(new ApiResponse(200, 'Patient deleted successfully', { email }));
+// });
 
 // ✅ Get Current Authenticated Patient
 const getCurrentPatient = asyncHandler(async (req: AuthenticatedRequest, res: Response) => {
@@ -113,10 +113,10 @@ const getCurrentPatient = asyncHandler(async (req: AuthenticatedRequest, res: Re
 });
 
 export {
-  Signup,
+  // Signup,
   Login,
   Logout,
-  deletePatient,
+  // deletePatient,
   getCurrentPatient,
   Health,
 };
