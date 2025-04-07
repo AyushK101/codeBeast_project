@@ -35,8 +35,15 @@ app.use(cookieParser())
 app.use(morganMiddleware)
 
 //routes
-// import demoRouter from './routes/demonroute'
-// app.use('/api/v1/demoRoute',demoRouter)
+import userRouter from './routes/patient.routes'
+import doctorRouter from './routes/doctor.routes'
+import prescriptionRouter from './routes/prescription.routes'
+import hospitalRouter from './routes/hospital.routes'
+
+app.use('/api/v1/users',userRouter)
+app.use('/api/v1/doctor',doctorRouter)
+app.use('/api/v1/prescription',prescriptionRouter)
+app.use('/api/v1/hospital',hospitalRouter)
 
 
 

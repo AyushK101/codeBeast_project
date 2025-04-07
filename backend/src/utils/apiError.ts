@@ -20,12 +20,12 @@ export default class ApiError extends Error implements ApiErrorType {
     
      // Serialize the error into a plain object
      this.error = error
-     ? {
-         message: error?.message,
-         name: error?.name,
-         stack: error?.stack,
-       }
-     : null;
+    //  ? {
+    //      message: error?.message,
+    //      name: error?.name,
+    //      stack: error?.stack,
+    //    }
+    //  : null;
 
     if (stack) {
       this.stack = stack;
